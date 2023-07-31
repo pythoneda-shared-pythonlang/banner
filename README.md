@@ -1,8 +1,10 @@
 # PythonEDA Banner
 
-ASCII banner for PythonEDA projects.
+ASCII banner and PS1 for PythonEDA projects.
 
 ## Usage
+
+### Print the banner
 
 ``` sh
 nix run https://github.com/pythoneda-shared-pythoneda/banner#default -- \
@@ -25,3 +27,19 @@ Where:
  * -l LAYER: The type of hexagonal layer. 'D' for Domain; 'I' for Infrastructure; 'A' for Application.
  * -p PYTHON_VERSION: The Python version.
  * -n NIXPKGS_RELEASE: The nixpkgs release.
+
+### Build the PS1 value
+
+``` sh
+export PS1="$(nix run https://github.com/pythoneda-shared-pythoneda/banner#default-ps1 -- \
+  -o [ORGANIZATION] \
+  -r [REPOSITORY] \
+  -t [TAG] \
+  -s [SPACE] \
+  -a [ARCHITECTURE_ROLE] \
+  -l [LAYER] \
+  -p [PYTHON_VERSION] \
+  -n [NIXPKGS_RELEASE])"; 
+```
+
+The values are the same as for the banner.

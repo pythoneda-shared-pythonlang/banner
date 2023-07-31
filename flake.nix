@@ -30,8 +30,10 @@
         pname = "pythoneda-shared-pythoneda-banner";
         pythonpackage = "pythoneda.banner";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
-        entrypoint = "banner";
-        entrypoint-path = "${package}/${entrypoint}.py";
+        banner-entrypoint = "banner";
+        banner-entrypoint-path = "${package}/${banner-entrypoint}.py";
+        ps1-entrypoint = "ps1";
+        ps1-entrypoint-path = "${package}/${ps1-entrypoint}.py";
         description = "Banner for PythonEDA projects";
         license = pkgs.lib.licenses.gpl3;
         homepage = "https://github.com/pythoneda-shared-pythoneda/domain";
@@ -91,11 +93,16 @@
               mkdir $out/dist $out/bin
               cp dist/${wheelName} $out/dist
               jq ".url = \"$out/dist/${wheelName}\"" $out/lib/python${pythonMajorMinorVersion}/site-packages/${pnameWithUnderscores}-${version}.dist-info/direct_url.json > temp.json && mv temp.json $out/lib/python${pythonMajorMinorVersion}/site-packages/${pnameWithUnderscores}-${version}.dist-info/direct_url.json
-              chmod +x $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path}
-              echo '#!/usr/bin/env sh' > $out/bin/${entrypoint}.sh
-              echo "export PYTHONPATH=$PYTHONPATH" >> $out/bin/${entrypoint}.sh
-              echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${entrypoint-path} \$@" >> $out/bin/${entrypoint}.sh
-              chmod +x $out/bin/${entrypoint}.sh
+              chmod +x $out/lib/python${pythonMajorMinorVersion}/site-packages/${banner-entrypoint-path}
+              echo '#!/usr/bin/env sh' > $out/bin/${banner-entrypoint}.sh
+              echo "export PYTHONPATH=$PYTHONPATH" >> $out/bin/${banner-entrypoint}.sh
+              echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${banner-entrypoint-path} \$@" >> $out/bin/${banner-entrypoint}.sh
+              chmod +x $out/bin/${banner-entrypoint}.sh
+              chmod +x $out/lib/python${pythonMajorMinorVersion}/site-packages/${ps1-entrypoint-path}
+              echo '#!/usr/bin/env sh' > $out/bin/${ps1-entrypoint}.sh
+              echo "export PYTHONPATH=$PYTHONPATH" >> $out/bin/${ps1-entrypoint}.sh
+              echo "${python}/bin/python $out/lib/python${pythonMajorMinorVersion}/site-packages/${ps1-entrypoint-path} \$@" >> $out/bin/${ps1-entrypoint}.sh
+              chmod +x $out/bin/${ps1-entrypoint}.sh
             '';
 
             meta = with pkgs.lib; {

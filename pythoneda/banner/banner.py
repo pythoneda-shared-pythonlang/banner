@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-banner.py
+pythoneda/banner/banner.py
 
 This file defines the Banner class.
 
@@ -19,9 +19,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+from pythoneda.banner.metadata import Metadata
 from typing import List
 
-class Banner():
+class Banner(Metadata):
     """
     Prints the PythonEDA banner in ASCII art.
 
@@ -56,89 +57,7 @@ class Banner():
         :return: The banner text.
         :rtype: List[str]
         """
-        super().__init__()
-        self._org = org
-        self._repo = repo
-        self._tag = tag
-        self._space = space
-        if self._space == '_':
-            self._space = ' '
-        self._arch_role = archRole
-        self._layer = layer
-        self._python_version = pythonVersion
-        self._nixpkgs_release = nixpkgsRelease
-
-    @property
-    def org(self) -> str:
-        """
-        Retrieves the organization name (in github terms).
-        :return: Such name.
-        :rtype: str
-        """
-        return self._org
-
-    @property
-    def repo(self) -> str:
-        """
-        Retrieves the repository name.
-        :return: Such name.
-        :rtype: str
-        """
-        return self._repo
-
-    @property
-    def tag(self) -> str:
-        """
-        Retrieves the tag.
-        :return: Such tag.
-        :rtype: str
-        """
-        return self._tag
-
-    @property
-    def space(self) -> str:
-        """
-        Retrieves the space type (' ' for none, 'A' for Artifact, 'R' for Runtime, 'T' for Tenant).
-        :return: Such information.
-        :rtype: str
-        """
-        return self._space
-
-    @property
-    def arch_role(self) -> str:
-        """
-        Retrieves the architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared, 'R' for Realm).
-        :return: Such information.
-        :rtype: str
-        """
-        return self._arch_role
-
-    @property
-    def layer(self) -> str:
-        """
-        Retrieves the hexagonal layer ('D' for Domain, 'I' for Infrastructure, 'A' for Application).
-        :return: Such information.
-        :rtype: str
-        """
-        return self._layer
-
-    @property
-    def python_version(self) -> str:
-        """
-        Retrieves the Python version.
-        :return: Such version.
-        :rtype: str
-        """
-        return self._python_version
-
-    @property
-    def nixpkgs_release(self) -> str:
-        """
-        Retrieves the Nixpkgs release.
-        :return: Such information.
-        :rtype: str
-        """
-        return self._nixpkgs_release
+        super().__init__(org, repo, tag, space, archRole, layer, pythonVersion, nixpkgsRelease)
 
     def center(self, txt:str, space:int) -> tuple:
         """
@@ -186,34 +105,5 @@ class Banner():
         print('\n'.join(self.build()))
 
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(
-        description="Prints the PythonEDA banner"
-    )
-    parser.add_argument(
-        "-o", "--organization", required=True, help="The github organization"
-    )
-    parser.add_argument(
-        "-r", "--repository", required=True, help="The name of the git repository"
-    )
-    parser.add_argument(
-        "-t", "--tag", required=True, help="The tag of the git repository"
-    )
-    parser.add_argument(
-        "-s", "--space", choices=["_", "A", "R", "T"], required=True, help="The space of the project"
-    )
-    parser.add_argument(
-        "-a", "--arch-role", choices=["B", "E", "S", "R"], required=True, help="The architecture role of the project"
-    )
-    parser.add_argument(
-        "-l", "--layer", choices=["D", "I", "A"], required=True, help="The layer of the project"
-    )
-    parser.add_argument(
-        "-p", "--python-version", required=True, help="The Python version"
-    )
-    parser.add_argument(
-        "-n", "--nixpkgs-release", required=True, help="The Nixpkgs release"
-    )
-    args, unknown_args = parser.parse_known_args()
-
-    Banner(args.organization, args.repository, args.tag, args.space, args.arch_role, args.layer, args.python_version, args.nixpkgs_release).print()
+    inst = Banner.parse_cli("Prints the PythonEDA banner")
+    inst.print()
