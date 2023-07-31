@@ -64,7 +64,8 @@ class PS1(Metadata):
         :return: The PS1.
         :rtype: str
         """
-        print(f"\\033[37m[\\[\033[01;34m\\]{self.org}/{self.repo}\033[01;37m#\033[01;33m{self.tag}\\033[01;37m|\\033[01;36m\\]python3-{self.python_version}\\]\\033[37m|\\[\\033[00m\\]\\[\\033[01;37m\\]\\W\\033[37m]\\033[31m$\\[\\033[00m\\] ")
+        python_major = self.python_version.split('.')[0]
+        print(f"\\033[37m[\\[\033[01;34m\\]{self.org}/{self.repo}\033[01;37m#\033[01;33m{self.tag}\\033[01;37m|\\033[01;36m\\]python{python_major}-{self.python_version}\\]\\033[37m|\\[\\033[00m\\]\\[\\033[01;37m\\]\\W\\033[37m]\\033[31m$\\[\\033[00m\\] ")
 
 
 if __name__ == "__main__":

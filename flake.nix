@@ -26,9 +26,9 @@
     with inputs;
     flake-utils.lib.eachDefaultSystem (system:
       let
-        version = "0.0.1a3";
-        pkgs = import nixos { inherit system; };
         pname = "pythoneda-shared-pythoneda-banner";
+        version = "0.0.1a4";
+        pkgs = import nixos { inherit system; };
         pythonpackage = "pythoneda.banner";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
         banner-entrypoint = "banner";
