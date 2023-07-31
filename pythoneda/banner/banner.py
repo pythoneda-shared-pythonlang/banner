@@ -150,10 +150,11 @@ class Banner():
         :return: The tuple with the number of spaces to print before and after the text.
         :rtype: tuple
         """
-        first_half=int(space/2)-int(len(txt)/2)
-        second_half=space-len(txt)-first_half
-        if len(txt)/2 != int(len(txt)/2):
-            first_half = first_half - 1
+        remaining = space - len(txt)
+        first_half = int(remaining / 2)
+        second_half = int(remaining / 2)
+        if remaining/2 == int(remaining/2):
+            second_half = first_half - 1
         return first_half, second_half
 
     def build(self) -> List[str]:

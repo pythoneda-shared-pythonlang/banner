@@ -27,17 +27,21 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixos { inherit system; };
+        pname = "pythoneda-shared-pythoneda-banner";
+        pythonpackage = "pythoneda.banner";
+        package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
+        entrypoint = "banner";
+        entrypoint-path = "${package}/${entrypoint}.py";
         description = "Banner for PythonEDA projects";
         license = pkgs.lib.licenses.gpl3;
         homepage = "https://github.com/pythoneda-shared-pythoneda/domain";
         maintainers = [ "rydnr <github@acm-sl.org>" ];
         nixpkgsRelease = "nixos-23.05";
+        shared = import ./nix/shared.nix;
         pythoneda-shared-pythoneda-banner-for = { python, version }:
           let
-            pname = "pythoneda-shared-pythoneda-banner";
             pnameWithUnderscores =
               builtins.replaceStrings [ "-" ] [ "_" ] pname;
-            pythonpackage = "pythoneda.banner";
             package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
             pythonVersionParts = builtins.splitVersion python.version;
             pythonMajorVersion = builtins.head pythonVersionParts;
@@ -45,8 +49,6 @@
               "${pythonMajorVersion}.${builtins.elemAt pythonVersionParts 1}";
             wheelName =
               "${pnameWithUnderscores}-${version}-py${pythonMajorVersion}-none-any.whl";
-            entrypoint = "banner";
-            entrypoint-path = "${package}/${entrypoint}.py";
           in python.pkgs.buildPythonPackage rec {
             inherit pname version;
             projectDir = ./.;
@@ -104,6 +106,40 @@
             inherit python;
           };
       in rec {
+        apps = rec {
+          default = pythoneda-shared-pythoneda-banner-latest;
+          pythoneda-shared-pythoneda-banner-0_0_1a1-python38 = shared.app-for {
+            package =
+              self.packages.${system}.pythoneda-shared-pythoneda-banner-0_0_1a1-python38;
+            inherit entrypoint;
+          };
+          pythoneda-shared-pythoneda-banner-0_0_1a1-python39 = shared.app-for {
+            package =
+              self.packages.${system}.pythoneda-shared-pythoneda-banner-0_0_1a1-python39;
+            inherit entrypoint;
+          };
+          pythoneda-shared-pythoneda-banner-0_0_1a1-python310 = shared.app-for {
+            package =
+              self.packages.${system}.pythoneda-shared-pythoneda-banner-0_0_1a1-python310;
+            inherit entrypoint;
+          };
+          pythoneda-shared-pythoneda-banner-0_0_1a1-python311 = shared.app-for {
+            package =
+              self.packages.${system}.pythoneda-shared-pythoneda-banner-0_0_1a1-python311;
+            inherit entrypoint;
+          };
+          pythoneda-shared-pythoneda-banner-latest =
+            pythoneda-shared-pythoneda-banner-latest-python311;
+          pythoneda-shared-pythoneda-banner-latest-python38 =
+            pythoneda-shared-pythoneda-banner-0_0_1a1-python38;
+          pythoneda-shared-pythoneda-banner-latest-python39 =
+            pythoneda-shared-pythoneda-banner-0_0_1a1-python39;
+          pythoneda-shared-pythoneda-banner-latest-python310 =
+            pythoneda-shared-pythoneda-banner-0_0_1a1-python310;
+          pythoneda-shared-pythoneda-banner-latest-python311 =
+            pythoneda-shared-pythoneda-banner-0_0_1a1-python311;
+        };
+        defaultApp = apps.default;
         defaultPackage = packages.default;
         packages = rec {
           default = pythoneda-shared-pythoneda-banner-latest;
@@ -119,14 +155,20 @@
             pythoneda-shared-pythoneda-banner-0_0_1a1-for {
               python = pkgs.python310;
             };
+          pythoneda-shared-pythoneda-banner-0_0_1a1-python311 =
+            pythoneda-shared-pythoneda-banner-0_0_1a1-for {
+              python = pkgs.python311;
+            };
           pythoneda-shared-pythoneda-banner-latest =
-            pythoneda-shared-pythoneda-banner-latest-python310;
+            pythoneda-shared-pythoneda-banner-latest-python311;
           pythoneda-shared-pythoneda-banner-latest-python38 =
             pythoneda-shared-pythoneda-banner-0_0_1a1-python38;
           pythoneda-shared-pythoneda-banner-latest-python39 =
             pythoneda-shared-pythoneda-banner-0_0_1a1-python39;
           pythoneda-shared-pythoneda-banner-latest-python310 =
             pythoneda-shared-pythoneda-banner-0_0_1a1-python310;
+          pythoneda-shared-pythoneda-banner-latest-python311 =
+            pythoneda-shared-pythoneda-banner-0_0_1a1-python311;
         };
       });
 }
