@@ -26,8 +26,10 @@
     with inputs;
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pname = "pythoneda-shared-pythoneda-banner";
-        version = "0.0.1a4";
+        org = "pythoneda-shared-pythoneda";
+        repo = "banner";
+        pname = "${org}-${repo}";
+        version = "0.0.1a5";
         pkgs = import nixos { inherit system; };
         pythonpackage = "pythoneda.banner";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
@@ -37,11 +39,13 @@
         ps1-entrypoint-path = "${package}/${ps1-entrypoint}.py";
         description = "Banner for PythonEDA projects";
         license = pkgs.lib.licenses.gpl3;
-        homepage = "https://github.com/pythoneda-shared-pythoneda/domain";
+        homepage = "https://github.com/${org}/${repo}";
         maintainers = [ "rydnr <github@acm-sl.org>" ];
-        nixosUrlParts = builtins.split "/" nixos.url;
-        nixpkgsRelease =
-          builtins.elemAt nixosUrlParts (builtins.length nixosUrlParts - 1);
+        archRole = "S";
+        space = "_";
+        layer = "D";
+        nixosVersion = builtins.readFile "${nixos}/.version";
+        nixpkgsRelease = "nixos-${nixosVersion}";
         shared = import ./nix/shared.nix;
         pythoneda-shared-pythoneda-banner-for = { python }:
           let
@@ -112,26 +116,26 @@
           };
       in rec {
         apps = rec {
-          default = pythoneda-shared-pythoneda-banner-latest;
+          default = pythoneda-shared-pythoneda-banner-default;
           pythoneda-shared-pythoneda-banner-python38 = shared.app-for {
             package =
               self.packages.${system}.pythoneda-shared-pythoneda-banner-python38;
-            inherit entrypoint;
+            entrypoint = banner-entrypoint;
           };
           pythoneda-shared-pythoneda-banner-python39 = shared.app-for {
             package =
               self.packages.${system}.pythoneda-shared-pythoneda-banner-python39;
-            inherit entrypoint;
+            entrypoint = banner-entrypoint;
           };
           pythoneda-shared-pythoneda-banner-python310 = shared.app-for {
             package =
               self.packages.${system}.pythoneda-shared-pythoneda-banner-python310;
-            inherit entrypoint;
+            entrypoint = banner-entrypoint;
           };
           pythoneda-shared-pythoneda-banner-python311 = shared.app-for {
             package =
               self.packages.${system}.pythoneda-shared-pythoneda-banner-python311;
-            inherit entrypoint;
+            entrypoint = banner-entrypoint;
           };
           pythoneda-shared-pythoneda-banner-default =
             pythoneda-shared-pythoneda-banner-python311;
