@@ -53,9 +53,9 @@ class Metadata:
         :type repo: str
         :param tag: The tag.
         :type tag: str
-        :param space: The space type (' ' or '_' for none, 'A' for Artifact, 'R' for Runtime, 'T' for Tenant).
+        :param space: The space type ('D' for Decision, 'A' for Artifact, 'R' for Runtime, 'T' for Tenant).
         :type space: str
-        :param archRole: The architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared, 'R' for Realm).
+        :param archRole: The architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared Kernel, 'R' for Realm).
         :type archRole: str
         :param layer: The layer ('D' for Domain, 'I' for Infrastructure, 'A' for Application).
         :type layer: str
@@ -71,8 +71,6 @@ class Metadata:
         self._repo = repo
         self._tag = tag
         self._space = space
-        if self._space == "_":
-            self._space = " "
         self._arch_role = archRole
         self._layer = layer
         self._python_version = pythonVersion
@@ -108,7 +106,7 @@ class Metadata:
     @property
     def space(self) -> str:
         """
-        Retrieves the space type (' ' for none, 'A' for Artifact, 'R' for Runtime, 'T' for Tenant).
+        Retrieves the space type ('D' for Decision, 'A' for Artifact, 'R' for Runtime, 'T' for Tenant).
         :return: Such information.
         :rtype: str
         """
@@ -117,7 +115,7 @@ class Metadata:
     @property
     def arch_role(self) -> str:
         """
-        Retrieves the architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared, 'R' for Realm).
+        Retrieves the architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared Kernel, 'R' for Realm).
         :return: Such information.
         :rtype: str
         """
@@ -172,21 +170,21 @@ class Metadata:
         parser.add_argument(
             "-s",
             "--space",
-            choices=["_", "A", "R", "T"],
+            choices=["D", "A", "R", "T"], # decision, artifact, runtime, tenant
             required=True,
-            help="The space of the project",
+            help="The Pescio space of the project",
         )
         parser.add_argument(
             "-a",
             "--arch-role",
-            choices=["B", "E", "S", "R"],
+            choices=["B", "E", "S", "R"], # bounded context, event, shared kernel, realm
             required=True,
             help="The architecture role of the project",
         )
         parser.add_argument(
             "-l",
             "--layer",
-            choices=["D", "I", "A"],
+            choices=["D", "I", "A"], # domain, infrastructure, application
             required=True,
             help="The layer of the project",
         )
