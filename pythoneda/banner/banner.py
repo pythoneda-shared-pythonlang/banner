@@ -94,7 +94,7 @@ class Banner(Metadata):
         result.append(f" \033[32m| |     __/ |{' '*line1_first_half}\033[34m{self.org.upper()}{' '*line1_second_half}\033[36mhttps://docs.python.org/{self.python_version}\033[0m")
         result.append(f" \033[32m|_|\033[37m{self.space}\033[31m{self.arch_role}\033[36m{self.layer}\033[32m |___/ {' '*line2_first_half}\033[33m{self.repo.upper()}{' '*line2_second_half}\033[37mhttps://patreon.com/rydnr\033[0m")
         result.append("")
-        result.append(f" Thank you for using {self.org}/{self.repo}, and for your appreciation of free software.")
+        result.append(f" Thank you for using \033[31m{self.org}/{self.repo} {self.tag}\033[0m, \033[32mpython\033[34me\033[35md\033[36ma\033[0m in general, and for your appreciation of free software.")
         result.append("")
         return result
 
