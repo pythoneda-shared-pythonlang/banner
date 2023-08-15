@@ -19,6 +19,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+import sys
 from typing import List
 
 class Metadata:
@@ -75,6 +76,8 @@ class Metadata:
         self._layer = layer
         self._python_version = pythonVersion
         self._nixpkgs_release = nixpkgsRelease
+        self._dep_count = self.__class__.count_dependencies()
+        self._pythoneda_dep_count = self.__class__.count_pythoneda_dependencies()
 
     @property
     def org(self) -> str:
@@ -147,6 +150,42 @@ class Metadata:
         :rtype: str
         """
         return self._nixpkgs_release
+
+    @property
+    def dep_count(self) -> int:
+        """
+        Retrieves the number of dependencies.
+        :return: Such information.
+        :rtype: int
+        """
+        return self._dep_count
+
+    @property
+    def pythoneda_dep_count(self) -> int:
+        """
+        Retrieves the number of PythonEDA dependencies.
+        :return: Such information.
+        :rtype: int
+        """
+        return self._pythoneda_dep_count
+
+    @classmethod
+    def count_dependencies(cls) -> int:
+        """
+        Counts the number of entries in sys.path
+        :return: Such count.
+        :rtype: int
+        """
+        return len(sys.path)
+
+    @classmethod
+    def count_pythoneda_dependencies(cls) -> int:
+        """
+        Counts the number of PythonEDA entries in sys.path
+        :return: Such count.
+        :rtype: int
+        """
+        return sum(1 for path in sys.path if "pythoneda" in path)
 
     @classmethod
     def parse_cli(cls, description: str):

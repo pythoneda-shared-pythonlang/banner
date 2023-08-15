@@ -26,21 +26,23 @@ rec {
       pythonMajorMinorVersion =
         "${pythonMajorVersion}.${builtins.elemAt pythonVersionParts 1}";
     in ''
-      export _PNAME="${package.pname}";
-      export _PVERSION="${package.version}";
-      export _PYNAME="${python.name}";
-      export _PYVERSION="${pythonMajorMinorVersion}";
-      export _NIXPKGSRELEASE="${nixpkgsRelease}";
+      export _PYTHONEDA_PACKAGE_NAME="${package.pname}";
+      export _PYTHONEDA_PACKAGE_VERSION="${package.version}";
+      export _PYTHONEDA_PYTHON_NAME="${python.name}";
+      export _PYTHONEDA_PYTHON_VERSION="${pythonMajorMinorVersion}";
+      export _PYTHONEDA_NIXPKGS_RELEASE="${nixpkgsRelease}";
       export _PYTHONEDA="${pythoneda-shared-pythoneda-domain}";
-      export _PYTHONEDABANNER="${pythoneda-shared-pythoneda-banner}";
-      export _ORG="${org}";
-      export _ARCHROLE="${archRole}";
-      export _LAYER="${layer}";
-      export _REPO="${repo}";
-      export _SPACE="${space}";
-      export _TAG="${package.version}";
-      export PS1="$($_PYTHONEDABANNER/bin/ps1.sh -o $_ORG -r $_REPO -t $_TAG -s $_SPACE -a $_ARCHROLE -l $_LAYER -p $_PYVERSION -n $_NIXPKGSRELEASE)";
-      $_PYTHONEDABANNER/bin/banner.sh -o $_ORG -r $_REPO -t $_TAG -s $_SPACE -a $_ARCHROLE -l $_LAYER -p $_PYVERSION -n $_NIXPKGSRELEASE
+      export _PYTHONEDA_BANNER="${pythoneda-shared-pythoneda-banner}";
+      export _PYTHONEDA_ORG="${org}";
+      export _PYTHONEDA_ARCH_ROLE="${archRole}";
+      export _PYTHONEDA_LAYER="${layer}";
+      export _PYTHONEDA_REPO="${repo}";
+      export _PYTHONEDA_SPACE="${space}";
+      export _PYTHONEDA_PACKAGE_TAG="${package.version}";
+      export _PYTHONEDA_PYTHON_DEPS="$(echo $PYTHONPATH | sed 's : \n g' | wc -l)"
+      export _PYTHONEDA_DEPS="$(echo $PYTHONPATH | sed 's : \n g' | grep 'pythoneda' | wc -l)"
+      export PS1="$($_PYTHONEDA_BANNER/bin/ps1.sh -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE)";
+      $_PYTHONEDABANNER/bin/banner.sh -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE
       export PYTHONPATH="$(python $_PYTHONEDA/dist/scripts/fix_pythonpath.py)";
     '';
   devShell-for = { archRole, layer, nixpkgsRelease, org, package, pkgs, python
