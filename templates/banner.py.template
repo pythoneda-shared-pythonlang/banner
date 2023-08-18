@@ -19,6 +19,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+import sys
 from pythoneda.banner import Banner
 
 class @banner_class@(Banner):
@@ -38,7 +39,17 @@ class @banner_class@(Banner):
         """
         Initializes the instance.
         """
-        super().__init__("@org@", "@repo@", "@tag@", "@pescio_space@", "@arch_role@", "@hexagonal_layer@", "@python_version@", "@nixpkgs_release@")
+        super().__init__(
+            "@org@",
+            "@repo@",
+            "@tag@",
+            "@pescio_space@",
+            "@arch_role@",
+            "@hexagonal_layer@",
+            "@python_version@",
+            "@nixpkgs_release@",
+            len(sys.path),
+            sum(1 for path in sys.path if "pythoneda" in path))
 
 if __name__ == "__main__":
     @banner_class@().print()
