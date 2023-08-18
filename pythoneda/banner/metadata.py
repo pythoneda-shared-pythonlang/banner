@@ -45,7 +45,9 @@ class Metadata:
         layer: str,
         pythonVersion: str,
         nixpkgsRelease: str,
-    ) -> List[str]:
+        depCount: int,
+        pythonedaDepCount: int
+    ):
         """
         Initializes the instance.
         :param org: The organization name (in github terms).
@@ -64,8 +66,10 @@ class Metadata:
         :type pythonVersion: str
         :param nixpkgsRelease: The name of the nixpkgs release.
         :type nixpkgsRelease: str
-        :return: The banner text.
-        :rtype: List[str]
+        :param depCount: The number of dependencies.
+        :type depCount: int
+        :param pythonedaDepCount: The number of PythonEDA dependencies.
+        :type pythonedaDepCount: int
         """
         super().__init__()
         self._org = org
@@ -76,8 +80,8 @@ class Metadata:
         self._layer = layer
         self._python_version = pythonVersion
         self._nixpkgs_release = nixpkgsRelease
-        self._dep_count = self.__class__.count_dependencies()
-        self._pythoneda_dep_count = self.__class__.count_pythoneda_dependencies()
+        self._dep_count = depCount
+        self._pythoneda_dep_count = pythonedaDepCount
 
     @property
     def org(self) -> str:
@@ -170,24 +174,6 @@ class Metadata:
         return self._pythoneda_dep_count
 
     @classmethod
-    def count_dependencies(cls) -> int:
-        """
-        Counts the number of entries in sys.path
-        :return: Such count.
-        :rtype: int
-        """
-        return len(sys.path)
-
-    @classmethod
-    def count_pythoneda_dependencies(cls) -> int:
-        """
-        Counts the number of PythonEDA entries in sys.path
-        :return: Such count.
-        :rtype: int
-        """
-        return sum(1 for path in sys.path if "pythoneda" in path)
-
-    @classmethod
     def parse_cli(cls, description: str):
         """
         Parses command-line arguments.
@@ -233,6 +219,12 @@ class Metadata:
         parser.add_argument(
             "-n", "--nixpkgs-release", required=True, help="The Nixpkgs release"
         )
+        parser.add_argument(
+            "-D", "--deps", required=True, help="The number of Python dependencies"
+        )
+        parser.add_argument(
+            "-d", "--pythoneda-deps", required=True, help="The number of PythonEDA dependencies"
+        )
         args, unknown_args = parser.parse_known_args()
 
         return cls(
@@ -244,4 +236,6 @@ class Metadata:
             args.layer,
             args.python_version,
             args.nixpkgs_release,
+            args.deps,
+            args.pythoneda_deps
         )

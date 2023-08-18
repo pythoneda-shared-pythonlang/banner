@@ -35,7 +35,19 @@ class Banner(Metadata):
         - None
     """
 
-    def __init__(self, org:str, repo:str, tag:str, space:str, archRole:str, layer:str, pythonVersion:str, nixpkgsRelease:str) -> List[str]:
+    def __init__(
+        self,
+        org: str,
+        repo: str,
+        tag: str,
+        space: str,
+        archRole: str,
+        layer: str,
+        pythonVersion: str,
+        nixpkgsRelease: str,
+        depCount: int,
+        pythonedaDepCount: int
+    ):
         """
         Initializes the instance.
         :param org: The organization name (in github terms).
@@ -54,10 +66,12 @@ class Banner(Metadata):
         :type pythonVersion: str
         :param nixpkgsRelease: The name of the nixpkgs release.
         :type nixpkgsRelease: str
-        :return: The banner text.
-        :rtype: List[str]
+        :param depCount: The number of dependencies.
+        :type depCount: int
+        :param pythonedaDepCount: The number of PythonEDA dependencies.
+        :type pythonedaDepCount: int
         """
-        super().__init__(org, repo, tag, space, archRole, layer, pythonVersion, nixpkgsRelease)
+        super().__init__(org, repo, tag, space, archRole, layer, pythonVersion, nixpkgsRelease, depCount, pythonedaDepCount)
 
     def center(self, txt:str, space:int) -> tuple:
         """

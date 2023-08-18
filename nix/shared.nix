@@ -39,10 +39,10 @@ rec {
       export _PYTHONEDA_REPO="${repo}";
       export _PYTHONEDA_SPACE="${space}";
       export _PYTHONEDA_PACKAGE_TAG="${package.version}";
-      export _PYTHONEDA_PYTHON_DEPS="$(echo $PYTHONPATH | sed 's : \n g' | wc -l)"
-      export _PYTHONEDA_DEPS="$(echo $PYTHONPATH | sed 's : \n g' | grep 'pythoneda' | wc -l)"
-      export PS1="$($_PYTHONEDA_BANNER/bin/ps1.sh -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_PACKAGE_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE)";
-      $_PYTHONEDA_BANNER/bin/banner.sh -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_PACKAGE_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE
+      export _PYTHONEDA_DEPS="$(echo $PYTHONPATH | sed 's : \n g' | wc -l)"
+      export _PYTHONEDA_PYTHONEDA_DEPS="$(echo $PYTHONPATH | sed 's : \n g' | grep 'pythoneda' | wc -l)"
+      export PS1="$($_PYTHONEDA_BANNER/bin/ps1.sh -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_PACKAGE_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE -D $_PYTHONEDA_DEPS -d $_PYTHONEDA_PYTHONEDA_DEPS)";
+      $_PYTHONEDA_BANNER/bin/banner.sh -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_PACKAGE_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE -D $_PYTHONEDA_DEPS -d $_PYTHONEDA_PYTHONEDA_DEPS
       export PYTHONPATH="$(python $_PYTHONEDA/dist/scripts/fix_pythonpath.py)";
     '';
   devShell-for = { archRole, layer, nixpkgsRelease, org, package, pkgs, python

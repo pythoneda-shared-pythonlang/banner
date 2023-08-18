@@ -29,7 +29,7 @@
         org = "pythoneda-shared-pythoneda";
         repo = "banner";
         pname = "${org}-${repo}";
-        version = "0.0.1a7";
+        version = "0.0.1a11";
         pkgs = import nixos { inherit system; };
         pythonpackage = "pythoneda.banner";
         package = builtins.replaceStrings [ "." ] [ "/" ] pythonpackage;
@@ -45,7 +45,8 @@
         space = "_";
         layer = "D";
         nixosVersion = builtins.readFile "${nixos}/.version";
-        nixpkgsRelease = "nixos-${nixosVersion}";
+        nixpkgsRelease =
+          builtins.replaceStrings [ "\n" ] [ "" ] "nixos-${nixosVersion}";
         shared = import ./nix/shared.nix;
         pythoneda-shared-pythoneda-banner-for = { python }:
           let
@@ -62,7 +63,8 @@
             inherit pname version;
             projectDir = ./.;
             src = ./.;
-            pyprojectTemplateFile = ./pyprojecttoml.template;
+            bannerTemplateFile = ./templates/banner.py.template;
+            pyprojectTemplateFile = ./templates/pyproject.toml.template;
             pyprojectTemplate = pkgs.substituteAll {
               authors = builtins.concatStringsSep ","
                 (map (item: ''"${item}"'') maintainers);
@@ -85,6 +87,7 @@
               sourceRoot=$(ls | grep -v env-vars)
               chmod +w $sourceRoot
               cp ${pyprojectTemplate} $sourceRoot/pyproject.toml
+              cp ${bannerTemplateFile} $sourceRoot/banner.py.template
             '';
 
             postInstall = ''
@@ -95,7 +98,8 @@
                 fi
               done
               popd
-              mkdir $out/dist $out/bin
+              mkdir $out/dist $out/bin $out/templates
+              cp banner.py.template $out/templates
               cp dist/${wheelName} $out/dist
               jq ".url = \"$out/dist/${wheelName}\"" $out/lib/python${pythonMajorMinorVersion}/site-packages/${pnameWithUnderscores}-${version}.dist-info/direct_url.json > temp.json && mv temp.json $out/lib/python${pythonMajorMinorVersion}/site-packages/${pnameWithUnderscores}-${version}.dist-info/direct_url.json
               chmod +x $out/lib/python${pythonMajorMinorVersion}/site-packages/${banner-entrypoint-path}
