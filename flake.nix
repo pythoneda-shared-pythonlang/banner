@@ -121,6 +121,8 @@
       in rec {
         apps = rec {
           default = pythoneda-shared-pythoneda-banner-default;
+          pythoneda-shared-pythoneda-banner-default =
+            pythoneda-shared-pythoneda-banner-python311;
           pythoneda-shared-pythoneda-banner-python38 = shared.app-for {
             package =
               self.packages.${system}.pythoneda-shared-pythoneda-banner-python38;
@@ -141,13 +143,13 @@
               self.packages.${system}.pythoneda-shared-pythoneda-banner-python311;
             entrypoint = banner-entrypoint;
           };
-          pythoneda-shared-pythoneda-banner-default =
-            pythoneda-shared-pythoneda-banner-python311;
         };
         defaultApp = apps.default;
         defaultPackage = packages.default;
         packages = rec {
           default = pythoneda-shared-pythoneda-banner-default;
+          pythoneda-shared-pythoneda-banner-default =
+            pythoneda-shared-pythoneda-banner-python311;
           pythoneda-shared-pythoneda-banner-python38 =
             pythoneda-shared-pythoneda-banner-for { python = pkgs.python38; };
           pythoneda-shared-pythoneda-banner-python39 =
@@ -156,8 +158,6 @@
             pythoneda-shared-pythoneda-banner-for { python = pkgs.python310; };
           pythoneda-shared-pythoneda-banner-python311 =
             pythoneda-shared-pythoneda-banner-for { python = pkgs.python311; };
-          pythoneda-shared-pythoneda-banner-default =
-            pythoneda-shared-pythoneda-banner-python311;
         };
       });
 }
