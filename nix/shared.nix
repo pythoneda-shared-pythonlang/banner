@@ -17,9 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 rec {
-  shellHook-for = { archRole, layer, nixpkgsRelease, org, package, python
-    , pythoneda-shared-pythoneda-domain, pythoneda-shared-pythoneda-banner, repo
-    , space, processPythonpath, rootFolder }:
+  shellHook-for = { archRole, layer, nixpkgsRelease, org, package
+    , processPythonpath, python, pythoneda-shared-pythoneda-domain
+    , pythoneda-shared-pythoneda-banner, repo, rootFolder, space }:
     let
       pythonVersionParts = builtins.splitVersion python.version;
       pythonMajorVersion = builtins.head pythonVersionParts;
@@ -54,15 +54,15 @@ rec {
         fi
       fi
     '';
-  devShell-for = { archRole, layer, nixpkgsRelease, org, package, pkgs, python
-    , pythoneda-shared-pythoneda-domain, pythoneda-shared-pythoneda-banner, repo
-    , space }:
+  devShell-for = { archRole, layer, nixpkgsRelease, org, package, pkgs
+    , processPythonpath, python, pythoneda-shared-pythoneda-domain
+    , pythoneda-shared-pythoneda-banner, repo, rootFolder, space }:
     pkgs.mkShell {
       buildInputs = [ package pythoneda-shared-pythoneda-banner ];
       shellHook = shellHook-for {
-        inherit archRole layer nixpkgsRelease org package python
-          pythoneda-shared-pythoneda-domain pythoneda-shared-pythoneda-banner
-          repo space;
+        inherit archRole layer nixpkgsRelease org package processPythonpath
+          python pythoneda-shared-pythoneda-domain
+          pythoneda-shared-pythoneda-banner repo rootFolder space;
       };
     };
   app-for = { package, entrypoint }: {
