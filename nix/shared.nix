@@ -18,8 +18,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 rec {
   shellHook-for = { archRole, layer, nixpkgsRelease, org, package, python
-    , pythoneda-shared-pythoneda-domain, pythoneda-shared-pythoneda-banner, repo
-    , space }:
+    , pythoneda-shared-pythoneda-domain, pythoneda-shared-pythoneda-banner
+    , banner, repo, space }:
     let
       pythonVersionParts = builtins.splitVersion python.version;
       pythonMajorVersion = builtins.head pythonVersionParts;
@@ -42,7 +42,7 @@ rec {
       export _PYTHONEDA_DEPS="$(echo $PYTHONPATH | sed 's : \n g' | wc -l)"
       export _PYTHONEDA_PYTHONEDA_DEPS="$(echo $PYTHONPATH | sed 's : \n g' | grep 'pythoneda' | wc -l)"
       export PS1="$($_PYTHONEDA_BANNER/bin/ps1.sh -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_PACKAGE_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE -D $_PYTHONEDA_DEPS -d $_PYTHONEDA_PYTHONEDA_DEPS)";
-      $_PYTHONEDA_BANNER/bin/banner.sh -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_PACKAGE_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE -D $_PYTHONEDA_DEPS -d $_PYTHONEDA_PYTHONEDA_DEPS
+      ${banner} -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_PACKAGE_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE -D $_PYTHONEDA_DEPS -d $_PYTHONEDA_PYTHONEDA_DEPS
       export _PYTHONEDA_PYTHONPATH_OLD="$PYTHONPATH";
       export _PYTHONEDA_PROCESS_PYTHONPATH="$PYTHONEDA_PROCESS_PYTHONPATH";
       export _PYTHONEDA_ROOT_FOLDER="$PYTHONEDA_ROOT_FOLDER";
@@ -55,12 +55,12 @@ rec {
       fi
     '';
   devShell-for = { archRole, layer, nixpkgsRelease, org, package, pkgs, python
-    , pythoneda-shared-pythoneda-domain, pythoneda-shared-pythoneda-banner, repo
-    , space }:
+    , pythoneda-shared-pythoneda-domain, pythoneda-shared-pythoneda-banner
+    , banner, repo, space }:
     pkgs.mkShell {
       buildInputs = [ package pythoneda-shared-pythoneda-banner ];
       shellHook = shellHook-for {
-        inherit archRole layer nixpkgsRelease org package python
+        inherit archRole banner layer nixpkgsRelease org package python
           pythoneda-shared-pythoneda-domain pythoneda-shared-pythoneda-banner
           repo space;
       };
