@@ -20,5 +20,5 @@ _PYTHONEDA_DEPS="$(echo "$PYTHONPATH" | sed 's : \n g' | wc -l)"
 export _PYTHONEDA_DEPS
 _PYTHONEDA_PYTHONEDA_DEPS="$(echo "$PYTHONPATH" | sed 's : \n g' | grep -c 'pythoneda')"
 export _PYTHONEDA_PYTHONEDA_DEPS
-@banner@ -o "@org@" -r "@repo@" -t "@version@" -s "@pescio_space@" -a "@arch_role@" -l "@hexagonal_layer@" -p "@python_version@" -D "$_PYTHONEDA_DEPS" -d "$_PYTHONEDA_PYTHONEDA_DEPS" -n "@nixpkgs_release@"
+@BANNER@ -o "@org@" -r "@repo@" -t "@version@" -s "@pescio_space@" -a "@arch_role@" -l "@hexagonal_layer@" -p "@python_version@" -D "$_PYTHONEDA_DEPS" -d "$_PYTHONEDA_PYTHONEDA_DEPS" -n "@nixpkgs_release@"
 $_PYTHONEDA_PYTHON @ENTRYPOINT@
