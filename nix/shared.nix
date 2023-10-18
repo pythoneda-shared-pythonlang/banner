@@ -50,6 +50,7 @@ rec {
           printf "\033[34m[INFO]\033[0m \033[36mSorting PYTHONPATH.\033[0m\n"
           export PYTHONPATH="$(python $_PYTHONEDA/dist/scripts/process_pythonpath.py sort)";
         fi
+        echo ""
       else
         export PYTHONPATH="$(python $_PYTHONEDA/dist/scripts/process_pythonpath.py -r "$PYTHONEDA_ROOT_FOLDER" development)";
       fi
