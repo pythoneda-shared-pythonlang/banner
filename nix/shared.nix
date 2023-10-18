@@ -45,11 +45,9 @@ rec {
       ${banner} -o $_PYTHONEDA_ORG -r $_PYTHONEDA_REPO -t $_PYTHONEDA_PACKAGE_TAG -s $_PYTHONEDA_SPACE -a $_PYTHONEDA_ARCH_ROLE -l $_PYTHONEDA_LAYER -p $_PYTHONEDA_PYTHON_VERSION -n $_PYTHONEDA_NIXPKGS_RELEASE -D $_PYTHONEDA_DEPS -d $_PYTHONEDA_PYTHONEDA_DEPS
       export _PYTHONEDA_PYTHONPATH_OLD="$PYTHONPATH";
       if [[ $PYTHONEDA_ROOT_FOLDER == "" ]]; then
-        echo ""
-        printf "\033[33m[WARNING]\033[0m \033[35mPYTHONEDA_ROOT_FOLDER\033[36m is \033[31mnot set\033[0m. \033[36mChanges in PythonEDA packages won't be noticed! \033[0m"
-        echo ""
+        printf "\033[33m[WARNING]\033[0m \033[35mPYTHONEDA_ROOT_FOLDER\033[36m is \033[31mnot set\033[0m. \033[36mChanges in PythonEDA packages won't be noticed! \033[0m\n"
         if [[ $PYTHONEDA_PROCESS_PYTHONPATH != "" ]]; then
-          printf "\033[34m[INFO]\033[0m \033[36mSorting PYTHONPATH.\033[0m"
+          printf "\033[34m[INFO]\033[0m \033[36mSorting PYTHONPATH.\033[0m\n"
           export PYTHONPATH="$(python $_PYTHONEDA/dist/scripts/process_pythonpath.py sort)";
         fi
       else
