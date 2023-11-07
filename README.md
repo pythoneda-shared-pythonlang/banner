@@ -2,6 +2,26 @@
 
 ASCII banner and PS1 for PythonEDA projects.
 
+## How to declare it in your flake
+
+Check the latest tag of the repository: <https://github.com/pythoneda-shared-pythoneda/banner/tags>, and use it instead of the `[version]` placeholder below.
+
+```nix
+{
+  description = "[..]";
+  inputs = rec {
+    [..]
+    pythoneda-shared-pythoneda-banner = {
+      [optional follows]
+      url = "github:pythoneda-shared-pythoneda/banner/[version]";
+    };
+  };
+  outputs = [..]
+};
+```
+
+Should you use [https://github.com/nixos/nixpkgs](nixpkgs "nixpkgs") and/or [https://github.com/numtide/flake-utils](flake-utils "flake-utils"), you might want to pin them in the `[optional follows]` section..
+
 ## Usage
 
 ### Print the banner
