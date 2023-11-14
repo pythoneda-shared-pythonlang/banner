@@ -22,5 +22,6 @@ _PYTHONEDA_PYTHONEDA_DEPS="$(echo "$PYTHONPATH" | sed 's : \n g' | grep -c 'pyth
 export _PYTHONEDA_PYTHONEDA_DEPS
 PYTHONEDA_EXTRA_NAMESPACES="@PYTHONEDA_EXTRA_NAMESPACES@"
 export PYTHONEDA_EXTRA_NAMESPACES
+@CUSTOM_CONTENT@
 @BANNER@ -o "@org@" -r "@repo@" -t "@version@" -s "@pescio_space@" -a "@arch_role@" -l "@hexagonal_layer@" -p "@python_version@" -D "$_PYTHONEDA_DEPS" -d "$_PYTHONEDA_PYTHONEDA_DEPS" -n "@nixpkgs_release@"
 $_PYTHONEDA_PYTHON @ENTRYPOINT@ "$@"
