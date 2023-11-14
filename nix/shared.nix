@@ -53,9 +53,9 @@ rec {
         echo ""
       else
         if [[ "$PYTHONEDA_EXTRA_NAMESPACES" != "" ]]; then
-          local _oldIFS="$IFS";
+          _oldIFS="$IFS";
           IFS="$DWIFS";
-          local _namespace;
+          _namespace;
           for _namespace in "$(echo $PYTHONEDA_EXTRA_NAMESPACES | sed 's : \n g')"; do
             IFS="$_oldIFS";
             _namespaceUpper="$(echo $_namespace | tr '[:lower:]' '[:upper:]')";
@@ -67,7 +67,7 @@ rec {
           done;
           IFS="$_oldIFS";
         fi
-        export PYTHONPATH="$(python $_PYTHONEDA/dist/scripts/process_pythonpath.py -r "$PYTHONEDA_ROOT_FOLDER" development)";
+        export PYTHONPATH="$(${python}/bin/python $_PYTHONEDA/dist/scripts/process_pythonpath.py -r "$PYTHONEDA_ROOT_FOLDER" development)";
       fi
     '';
   devShell-for = { archRole, banner, layer, nixpkgsRelease, org, package, pkgs
