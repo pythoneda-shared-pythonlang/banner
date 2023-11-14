@@ -60,9 +60,10 @@ rec {
             IFS="$_oldIFS";
             _namespaceUpper="$(echo $_namespace | tr '[:lower:]' '[:upper:]')";
             _variable="$(echo -n \"PYTHONEDA_$_namespaceUpper\"; echo '_ROOT_FOLDER')"
-            echo "namespace -> "
-            _variableValue="$(eval echo "\$$_variable")";
-            if [[ "$_variableValue" == "" ]]; then
+            echo "namespace -> $_variable"
+            _namespaceRootFolder="$(eval echo "\$$_variable")";
+            echo "folder -> $_namespaceRootFolder"
+            if [[ "$_namespaceRootFolder" == "" ]]; then
               printf "\033[33m[WARNING]\033[0m \033[35m$_variable\033[36m is \033[31mnot set\033[0m. \033[36mChanges in $_namespace packages won't be noticed! \033[0m\n";
             fi
           done;
