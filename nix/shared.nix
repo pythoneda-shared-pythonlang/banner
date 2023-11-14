@@ -76,7 +76,7 @@ rec {
     pkgs.mkShell {
       buildInputs = [ package pythoneda-shared-pythoneda-banner ];
       shellHook = shellHook-for {
-        inherit archRole banner dry-wit layer nixpkgsRelease org package python
+        inherit archRole banner layer nixpkgsRelease org package python
           pythoneda-shared-pythoneda-domain pythoneda-shared-pythoneda-banner
           repo space;
       };
