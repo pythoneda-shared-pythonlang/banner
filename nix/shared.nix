@@ -60,7 +60,7 @@ rec {
             IFS="$_oldIFS";
             namespaceUpper="$(echo $namespace | tr '[:lower:]' '[:upper:]')";
             echo "namespaceUpper -> $namespaceUpper";
-            variable="$(echo -n \"PYTHONEDA_$namespaceUpper\"; echo '_ROOT_FOLDER')"
+            variable="$(echo -n "PYTHONEDA_$namespaceUpper"; echo '_ROOT_FOLDER')"
             echo "namespace -> $variable"
             namespaceRootFolder="$(eval echo "\$$variable")";
             echo "folder -> $namespaceRootFolder"
