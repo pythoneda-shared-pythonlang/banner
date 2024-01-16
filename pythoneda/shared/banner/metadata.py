@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+# vim: set fileencoding=utf-8
 """
-pythoneda/banner/metadata.py
+pythoneda/shared/banner/metadata.py
 
 This file defines the Metadata class.
 
@@ -21,6 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 import sys
 from typing import List
+
 
 class Metadata:
     """
@@ -46,7 +47,7 @@ class Metadata:
         pythonVersion: str,
         nixpkgsRelease: str,
         depCount: int,
-        pythonedaDepCount: int
+        pythonedaDepCount: int,
     ):
         """
         Initializes the instance.
@@ -195,21 +196,26 @@ class Metadata:
         parser.add_argument(
             "-s",
             "--space",
-            choices=["D", "A", "R", "T"], # decision, artifact, runtime, tenant
+            choices=["D", "A", "R", "T"],  # decision, artifact, runtime, tenant
             required=True,
             help="The Pescio space of the project",
         )
         parser.add_argument(
             "-a",
             "--arch-role",
-            choices=["B", "E", "S", "R"], # bounded context, event, shared kernel, realm
+            choices=[
+                "B",
+                "E",
+                "S",
+                "R",
+            ],  # bounded context, event, shared kernel, realm
             required=True,
             help="The architecture role of the project",
         )
         parser.add_argument(
             "-l",
             "--layer",
-            choices=["D", "I", "A"], # domain, infrastructure, application
+            choices=["D", "I", "A"],  # domain, infrastructure, application
             required=True,
             help="The layer of the project",
         )
@@ -223,7 +229,10 @@ class Metadata:
             "-D", "--deps", required=True, help="The number of Python dependencies"
         )
         parser.add_argument(
-            "-d", "--pythoneda-deps", required=True, help="The number of PythonEDA dependencies"
+            "-d",
+            "--pythoneda-deps",
+            required=True,
+            help="The number of PythonEDA dependencies",
         )
         args, unknown_args = parser.parse_known_args()
 
@@ -237,5 +246,5 @@ class Metadata:
             args.python_version,
             args.nixpkgs_release,
             args.deps,
-            args.pythoneda_deps
+            args.pythoneda_deps,
         )

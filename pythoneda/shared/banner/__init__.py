@@ -1,7 +1,8 @@
+# vim: set fileencoding=utf-8
 """
-pythoneda/banner/__init__.py
+pythoneda/shared/banner/__init__.py
 
-This file ensures pythoneda.banner is a package.
+This file ensures pythoneda.shared.banner is a package.
 
 Copyright (C) 2023-today rydnr's pythoneda-shared-pythoneda/banner
 

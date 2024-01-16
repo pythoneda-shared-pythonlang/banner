@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+# vim: set fileencoding=utf-8
 """
-pythoneda/banner/ps1.py
+pythoneda/shared/banner/ps1.py
 
 This file defines the PS1 class.
 
@@ -19,8 +19,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from pythoneda.banner import Metadata
+from .metadata import Metadata
 from typing import List
+
 
 class PS1(Metadata):
     """
@@ -34,6 +35,7 @@ class PS1(Metadata):
     Collaborators:
         - None
     """
+
     def __init__(
         self,
         org: str,
@@ -45,7 +47,7 @@ class PS1(Metadata):
         pythonVersion: str,
         nixpkgsRelease: str,
         depCount: int,
-        pythonedaDepCount: int
+        pythonedaDepCount: int,
     ):
         """
         Initializes the instance.
@@ -70,7 +72,18 @@ class PS1(Metadata):
         :param pythonedaDepCount: The number of PythonEDA dependencies.
         :type pythonedaDepCount: int
         """
-        super().__init__(org, repo, tag, space, archRole, layer, pythonVersion, nixpkgsRelease, depCount, pythonedaDepCount)
+        super().__init__(
+            org,
+            repo,
+            tag,
+            space,
+            archRole,
+            layer,
+            pythonVersion,
+            nixpkgsRelease,
+            depCount,
+            pythonedaDepCount,
+        )
 
     def print(self) -> str:
         """
@@ -78,8 +91,10 @@ class PS1(Metadata):
         :return: The PS1.
         :rtype: str
         """
-        python_major = self.python_version.split('.')[0]
-        print(f"\\033[37m[\\[\033[01;34m\\]{self.org}/{self.repo}\033[01;37m#\033[01;33m{self.tag}\\033[01;37m|\\033[01;36m\\]python{python_major}-{self.python_version}\\]\\033[37m|\\[\\033[00m\\]\\[\\033[01;37m\\]\\W\\033[37m]\\033[31m$\\[\\033[00m\\] ")
+        python_major = self.python_version.split(".")[0]
+        print(
+            f"\\033[37m[\\[\033[01;34m\\]{self.org}/{self.repo}\033[01;37m#\033[01;33m{self.tag}\\033[01;37m|\\033[01;36m\\]python{python_major}-{self.python_version}\\]\\033[37m|\\[\\033[00m\\]\\[\\033[01;37m\\]\\W\\033[37m]\\033[31m$\\[\\033[00m\\] "
+        )
 
 
 if __name__ == "__main__":
