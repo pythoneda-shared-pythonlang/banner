@@ -4,7 +4,7 @@ pythoneda/shared/banner/metadata.py
 
 This file defines the Metadata class.
 
-Copyright (C) 2023-today rydnr's pythoneda-shared-pythoneda/banner
+Copyright (C) 2023-today rydnr's pythoneda-shared/banner
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
