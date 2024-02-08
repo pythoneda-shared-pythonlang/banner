@@ -4,16 +4,16 @@ ASCII banner and PS1 for PythonEDA projects.
 
 ## How to declare it in your flake
 
-Check the latest tag of the repository: <https://github.com/pythoneda-shared-pythoneda-def/banner/tags>, and use it instead of the `[version]` placeholder below.
+Check the latest tag of the repository: <https://github.com/pythoneda-shared-pythonlang-def/banner/tags>, and use it instead of the `[version]` placeholder below.
 
 ```nix
 {
   description = "[..]";
   inputs = rec {
     [..]
-    pythoneda-shared-pythoneda-banner = {
+    pythoneda-shared-pythonlang-banner = {
       [optional follows]
-      url = "github:pythoneda-shared-pythoneda-def/banner/[version]";
+      url = "github:pythoneda-shared-pythonlang-def/banner/[version]";
     };
   };
   outputs = [..]
@@ -27,7 +27,7 @@ Should you use [https://github.com/nixos/nixpkgs](nixpkgs "nixpkgs") and/or [htt
 ### Print the banner
 
 ``` sh
-nix run https://github.com/pythoneda-shared-pythoneda-def/banner#default -- \
+nix run https://github.com/pythoneda-shared-pythonlang-def/banner#default -- \
   -o [ORGANIZATION] \
   -r [REPOSITORY] \
   -t [TAG] \
@@ -51,7 +51,7 @@ Where:
 ### Build the PS1 value
 
 ``` sh
-export PS1="$(nix run https://github.com/pythoneda-shared-pythoneda-def/banner#default-ps1 -- \
+export PS1="$(nix run https://github.com/pythoneda-shared-pythonlang-def/banner#default-ps1 -- \
   -o [ORGANIZATION] \
   -r [REPOSITORY] \
   -t [TAG] \

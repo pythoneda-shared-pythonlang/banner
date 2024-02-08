@@ -4,7 +4,7 @@ pythoneda/shared/banner/metadata.py
 
 This file defines the Metadata class.
 
-Copyright (C) 2023-today rydnr's pythoneda-shared/banner
+Copyright (C) 2023-today rydnr's pythoneda-shared-pythonlang/banner
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -248,6 +248,8 @@ class Metadata:
             args.deps,
             args.pythoneda_deps,
         )
+
+
 # vim: syntax=python ts=4 sw=4 sts=4 tw=79 sr et
 # Local Variables:
 # mode: python

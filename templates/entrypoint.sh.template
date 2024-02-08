@@ -13,7 +13,7 @@
 #
 export _PYTHONEDA_PYTHON="@python@/bin/python"
 export _PYTHONPATH_ORIG="@PYTHONPATH@"
-PYTHONPATH="$(PYTHONPATH=$_PYTHONPATH_ORIG $_PYTHONEDA_PYTHON @pythoneda_shared_domain@/dist/scripts/process_pythonpath.py sort)"
+PYTHONPATH="$(PYTHONPATH=$_PYTHONPATH_ORIG $_PYTHONEDA_PYTHON @pythoneda_shared_pythonlang_domain@/dist/scripts/process_pythonpath.py sort)"
 export PYTHONPATH
 _PYTHONEDA_DEPS="$(echo "$PYTHONPATH" | sed 's : \n g' | wc -l)"
 export _PYTHONEDA_DEPS
