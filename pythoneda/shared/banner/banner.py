@@ -122,13 +122,13 @@ class Banner(Metadata):
             " \033[32m _ __  _   _| |_| |__   ___  _ __   \033[34m___  \033[35m__| | \033[36m__ _ \033[32mhttps://pythoneda.github.io\033[0m\033[0m"
         )
         result.append(
-            f" \033[32m| '_ \|| | | | __| '_ \ / _ \\| '_ \ \033[34m/ _ \\\033[35m/ _` |\033[36m/ _` |\033[33mhttps://github.com/{self.org}/{self.repo}/tree/{self.tag}\033[0m"
+            f" \033[32m| '_ \\|| | | | __| '_ \ / _ \\| '_ \ \033[34m/ _ \\\033[35m/ _` |\033[36m/ _` |\033[33mhttps://github.com/{self.org}/{self.repo}/tree/{self.tag}\033[0m"
         )
         result.append(
             f" \033[32m| |_) | |_| | |_| | | | (_) | | | |\033[34m  __/\033[35m (_| |\033[36m (_| |\033[34mhttps://github.com/{self.org}\033[0m"
         )
         result.append(
-            f" \033[32m| .__/ \__, |\__|_| |_|\___/|_| |_|\033[34m\___|\033[35m\__,_|\033[36m\__,_|\033[35mhttps://github.com/nixos/nixpkgs/tree/{self.nixpkgs_release}\033[0m"
+            f" \033[32m| .__/ \\__, |\\__|_| |_|\___/|_| |_|\033[34m\\___|\033[35m\\__,_|\033[36m\\__,_|\033[35mhttps://github.com/nixos/nixpkgs/tree/{self.nixpkgs_release}\033[0m"
         )
         result.append(
             f" \033[32m| |     __/ |{' '*line1_first_half}\033[34m{self.org.upper()}{' '*line1_second_half}\033[36mhttps://docs.python.org/{self.python_version}\033[0m"
