@@ -59,7 +59,7 @@ class Metadata:
         :type tag: str
         :param space: The space type ('D' for Decision, 'A' for Artifact, 'R' for Runtime, 'T' for Tenant).
         :type space: str
-        :param archRole: The architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared Kernel, 'R' for Realm).
+        :param archRole: The architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared Kernel, 'R' for Realm, 'I' for Infrastructure-as-Code).
         :type archRole: str
         :param layer: The layer ('D' for Domain, 'I' for Infrastructure, 'A' for Application).
         :type layer: str
@@ -123,7 +123,7 @@ class Metadata:
     @property
     def arch_role(self) -> str:
         """
-        Retrieves the architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared Kernel, 'R' for Realm).
+        Retrieves the architecture role ('B' for Bounded Context, 'E' for Event, 'S' for Shared Kernel, 'R' for Realm, 'I' for Infrastructure-as-Code).
         :return: Such information.
         :rtype: str
         """
@@ -196,19 +196,25 @@ class Metadata:
         parser.add_argument(
             "-s",
             "--space",
-            choices=["D", "A", "R", "T"],  # decision, artifact, runtime, tenant
+            choices=[
+                "D",  # Decision
+                "A",  # Artifact
+                "R",  # Runtime
+                "T",  # Tenant
+                "I",  # IaC
+            ],
             required=True,
-            help="The Pescio space of the project",
+            help="The (extended) Pescio space of the project",
         )
         parser.add_argument(
             "-a",
             "--arch-role",
             choices=[
-                "B",
-                "E",
-                "S",
-                "R",
-            ],  # bounded context, event, shared kernel, realm
+                "B",  # Bounded Context
+                "E",  # Event
+                "S",  # Shared kernel
+                "R",  # Realm
+            ],
             required=True,
             help="The architecture role of the project",
         )
