@@ -122,7 +122,7 @@ class Banner(Metadata):
             " \033[32m _ __  _   _| |_| |__   ___  _ __   \033[34m___  \033[35m__| | \033[36m__ _ \033[32mhttps://pythoneda.github.io\033[0m\033[0m"
         )
         result.append(
-            f" \033[32m| '_ \\| | | |  __| '_ \\ / _ \\| '_ \\ \033[34m/ _ \\\033[35m/ _` |\033[36m/ _` |\033[33mhttps://github.com/{self.org}/{self.repo}/tree/{self.tag}\033[0m"
+            f" \033[32m| '_ \\| | | | __| '_ \\ / _ \\| '_ \\ \033[34m/ _ \\\033[35m/ _` |\033[36m/ _` |\033[33mhttps://github.com/{self.org}/{self.repo}/tree/{self.tag}\033[0m"
         )
         result.append(
             f" \033[32m| |_) | |_| | |_| | | | (_) | | | |\033[34m  __/\033[35m (_| |\033[36m (_| |\033[34mhttps://github.com/{self.org}\033[0m"
